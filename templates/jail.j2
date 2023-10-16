@@ -1,6 +1,9 @@
 [{{ item.name }}]
-enabled  = true
-port     = {{ item.port }}
-filter   = {{ item.filter }}
-logpath  = {{ item.logpath }}
-action   = {{ item.action }}
+enabled = {{ item.enabled }}
+filter = {{ item.filter.name }}
+port = {{ item.port }}
+logpath = {{ item.logpath }}
+action = {{ item.action.name }}[name={{ item.name }}]
+maxretry = {{ item.maxretry }}
+findtime = {{ item.findtime }}
+bantime = {{ item.bantime }}

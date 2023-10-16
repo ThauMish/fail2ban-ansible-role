@@ -1,16 +1,24 @@
 ---
 - hosts: all
-  become: true
+- become: true
   vars:
     fail2ban_services:
       - name: nextcloud
+        enabled: true
+        port: "80,443"
         logpath: /drbd/nuage/docker/stack/nuage/conf/fail2ban/nextcloud.log
         filter:
-          name: nextcloud-filter
+          name: nextcloud
           definition:
-            _groupsre: '(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'
-            failregex: '^{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:'
-            datepattern: ',?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"'
-        action: iptables-docker-user
+            _groupsre: '(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)
+            failregex: ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:
+            datepattern: ,?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"
+        action:
+          name: iptables-docker-user
+          ban: "iptables -I DOCKER-USER -s <ip> -j DROP"
+          unban: "iptables -D DOCKER-USER -s <ip> -j DROP"
+        maxretry: 3
+        findtime: 600
+        bantime: 3600
   roles:
     - fail2ban-config
