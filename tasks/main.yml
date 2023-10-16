@@ -5,6 +5,9 @@
     dest: "/etc/fail2ban/filter.d/{{ item.filter.name }}.conf"
   with_items: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
+  tags:
+    - config
+    - filter
 
 - name: Verif jails bien en place
   template:
@@ -12,6 +15,9 @@
     dest: "/etc/fail2ban/jail.d/{{ item.name }}.conf"
   with_items: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
+  tags:
+    - config
+    - jail
 
 - name: Verif actions bien en place
   template:
@@ -19,3 +25,6 @@
     dest: "/etc/fail2ban/action.d/{{ item.action.name }}.conf"
   with_items: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
+  tags:
+    - config
+    - action
