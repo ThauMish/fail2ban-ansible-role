@@ -4,15 +4,18 @@
     src: "filter.j2"
     dest: "/etc/fail2ban/filter.d/{{ item.filter.name }}.conf"
   with_items: "{{ fail2ban_services }}"
+  notify: Restart Fail2Ban
 
 - name: Verif jails bien en place
   template:
     src: "jail.j2"
     dest: "/etc/fail2ban/jail.d/{{ item.name }}.conf"
   with_items: "{{ fail2ban_services }}"
+  notify: Restart Fail2Ban
 
 - name: Verif actions bien en place
   template:
     src: "action.j2"
     dest: "/etc/fail2ban/action.d/{{ item.action.name }}.conf"
   with_items: "{{ fail2ban_services }}"
+  notify: Restart Fail2Ban
