@@ -34,7 +34,7 @@ Le rôle permet:
 1. **Cloner le dépôt**:
 
    ```bash
-   git clone https://github.com/thaumishansible-fail2ban-role.git
+   git clone https://github.com/thaumish/ansible-fail2ban-role.git
    cd ansible-fail2ban-role
    ```
 
