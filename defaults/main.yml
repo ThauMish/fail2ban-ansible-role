@@ -33,9 +33,6 @@
             datepattern: '%%Y-%%m-%%dT%%H:%%M:%%S\.%%f%%z'
         action:
           name: iptables-docker-user
-          start: "{{ default_action_start }}"
-          stop: "{{ default_action_stop }}"
-          check: "{{ default_action_check }}"
           ban: "iptables -I DOCKER-USER -s <ip> -j DROP"
           unban: "iptables -D DOCKER-USER -s <ip> -j DROP"
         maxretry: 3
