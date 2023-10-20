@@ -1,6 +1,12 @@
 [Definition]
+{% if item.action.start is defined and item.action.start|length > 0 %}
 actionstart = {{ item.action.start }}
+{% endif %}
+{% if item.action.stop is defined and item.action.stop|length > 0 %}
 actionstop = {{ item.action.stop }}
+{% endif %}
+{% if item.action.check is defined and item.action.check|length > 0 %}
 actioncheck = {{ item.action.check }}
+{% endif %}
 actionban = {{ item.action.ban }}
 actionunban = {{ item.action.unban }}

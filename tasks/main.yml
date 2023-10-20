@@ -1,4 +1,13 @@
 ---
+
+# Main tasks file for fail2ban role
+
+- name: 'INIT | Manage variables to use for our target'
+  import_tasks: "{{ role_path }}/tasks/manage_variables.yml"
+  tags:
+    - 'role::fail2ban'
+    - 'role::fail2ban:init'
+
 - name: Verif filtres bien en place
   template:
     src: "filter.j2"
@@ -6,8 +15,8 @@
   loop: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
   tags:
-    - config
-    - filter
+    - role::fail2ban
+    - role::fail2ban:filter
 
 - name: Verif jails bien en place
   template:
@@ -16,8 +25,8 @@
   loop: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
   tags:
-    - config
-    - jail
+    - role::fail2ban
+    - role::fail2ban:jail
 
 - name: Verif actions bien en place
   template:
@@ -26,5 +35,5 @@
   loop: "{{ fail2ban_services }}"
   notify: Restart Fail2Ban
   tags:
-    - config
-    - action
+    - role::fail2ban
+    - role::fail2ban:action

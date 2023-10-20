@@ -1,0 +1,21 @@
+---
+
+galaxy_info:
+  author: 'Damien BERAUD'
+  description: 'Ansible role to install and configure fail2ban'
+  company: 'Dawan (https://dawan.fr)'
+  license: 'MIT'
+  min_ansible_version: '2.8'
+  github_branch: 'master'
+  platforms:
+    - name: 'Debian'
+      versions:
+        - 'jessie'
+        - 'stretch'
+        - 'buster'
+    - name: 'Ubuntu'
+      versions:
+        - 'xenial'
+        - 'bionic'
+  galaxy_tags: []
+dependencies: []
